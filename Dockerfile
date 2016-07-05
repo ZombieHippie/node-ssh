@@ -1,4 +1,4 @@
-FROM mhart/alpine-node:5
+FROM mhart/alpine-node:5.12.0
 
 RUN apk update && \
   apk add \
