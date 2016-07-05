@@ -1,0 +1,24 @@
+#!/bin/bash
+
+mkdir -p ~/.ssh/
+
+if [ "$PLUGIN_KNOWN_HOSTS" == "UNSPECIFIED" ]
+then
+  echo "[node-ssh] known_hosts variable unspecified."
+else
+  # Add known hosts
+  echo -e $PLUGIN_KNOWN_HOSTS > ~/.ssh/known_hosts
+fi
+
+if [ "$PLUGIN_ID_RSA" == "UNSPECIFIED" ]
+then
+  echo "[node-ssh] id_rsa variable unspecified."
+else
+  # create github_rsa
+  echo -e $PLUGIN_ID_RSA > ~/.ssh/id_rsa
+  chmod 700 ~/.ssh/id_rsa
+  # Append created id_rsa to ssh config
+  echo -e "Host github.com\n  IdentityFile ~/.ssh/id_rsa" >> ~/.ssh/config
+fi
+
+node
