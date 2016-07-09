@@ -17,10 +17,9 @@ ENV SHELL /bin/bash
 ENV SSH_ID_RSA UNSPECIFIED
 ENV SSH_KNOWN_HOSTS UNSPECIFIED
 
-WORKDIR /node-ssh
+WORKDIR /bin
 
-ADD setup /node-ssh/
+ADD setup-ssh-keys /bin/
+RUN chmod +x /bin/setup-ssh-keys
 
-RUN chmod +x /node-ssh/setup
-
-CMD ["/node-ssh/setup"]
+CMD ["/bin/setup-ssh-keys"]
